@@ -22,32 +22,15 @@ class BaseYandexApi {
   }
 
   async get(url) {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
-    const options = {
-      url: this.host + url,
-      headers: {
-        Host: this.host,
-        Authorization: `OAuth ${this.token}`,
-        Accept: 'application/json',
-      },
-    };
-
-    request(options, (error, response, body) => {
-      console.log(error);
-      console.log(response);
-    });
-
-    /* try {
+    try {
       const res = axios.get(this.host + url, {
         headers: this.config.headers,
-        httpsAgent,
       });
 
       return res;
     } catch (error) {
       console.log(error);
-    } */
+    }
 
     return null;
   }
