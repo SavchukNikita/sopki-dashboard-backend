@@ -12,8 +12,10 @@
     },
     "rules": {
         "linebreak-style": 0,
-        "consistent-return": "warn",
+        "consistent-return": "off",
         "no-console": 0,
-        "import/extensions": 0
+        "import/extensions": 0,
+        "class-methods-use-this":"off",
+        "no-unused-vars":"off"
     }
 }

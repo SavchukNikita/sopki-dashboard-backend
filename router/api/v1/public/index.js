@@ -1,8 +1,8 @@
 import router from 'router';
-import v1 from './v1/index.js';
+import signin from './signin/index.js';
 
 const appRouter = router();
 
-appRouter.use('/v1', v1);
+appRouter.post('/signin', signin);
 
 export default appRouter;
