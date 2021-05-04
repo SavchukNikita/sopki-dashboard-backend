@@ -28,4 +28,29 @@ export default {
     status: 'invalidSubmethod',
     data,
   }),
+
+  invalidFirstname: (data = null) => ({
+    status: 'invalidFirstname',
+    data,
+  }),
+
+  invalidLastname: (data = null) => ({
+    status: 'invalidLastname',
+    data,
+  }),
+
+  invalidUsername: (data = null) => ({
+    status: 'invalidUsername',
+    data,
+  }),
+
+  invalidPassword: (data = null) => ({
+    status: 'invalidPassword',
+    data,
+  }),
+
+  alreadyExist: (data = null) => ({
+    status: 'alreadyExist',
+    data,
+  }),
 };

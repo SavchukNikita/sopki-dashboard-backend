@@ -7,7 +7,7 @@ const config = {
   passwordField: 'password',
 };
 
-const handler = new LocalStrategy(config, (username, password, done) => {
+const signIn = new LocalStrategy(config, (username, password, done) => {
   const findObj = {
     username: username.trim(),
   };
@@ -32,4 +32,4 @@ const handler = new LocalStrategy(config, (username, password, done) => {
   });
 });
 
-export default handler;
+export default signIn;

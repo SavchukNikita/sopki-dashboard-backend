@@ -3,6 +3,6 @@ import signin from './signin/index.js';
 
 const appRouter = router();
 
-appRouter.use('/signin', signin);
+appRouter.post('/signin', signin);
 
 export default appRouter;

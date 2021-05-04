@@ -3,6 +3,6 @@ import handler from './handler/index.js';
 
 const appRouter = router();
 
-appRouter.use('/', handler);
+appRouter.post('/', handler);
 
 export default appRouter;
