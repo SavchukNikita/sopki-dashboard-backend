@@ -12,7 +12,7 @@ const handler = new LocalStrategy(config, (username, password, done) => {
     username: username.trim(),
   };
 
-  global.db.model.User.findOne(findObj, (err, user) => {
+  global.db.models.User.findOne(findObj, (err, user) => {
     if (err) {
       done(err);
       return null;
@@ -23,7 +23,7 @@ const handler = new LocalStrategy(config, (username, password, done) => {
       return null;
     }
 
-    if (user.password !== password.trim()) {
+    if (!user.validPassword(password)) {
       done(null, false, { message: 'Incorrect password' });
       return null;
     }

@@ -10,7 +10,7 @@ export default {
     });
   },
   mongoose,
-  model: {
+  models: {
     User: mongoose.model('User', User),
   },
 };

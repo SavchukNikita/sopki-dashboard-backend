@@ -1,8 +1,9 @@
 const handler = (req, res, next) => {
   global.passport.authenticate('local', (err, user, info) => {
-    console.log(`Err: ${err}`);
-    console.log(`User: ${user}`);
-    console.log(`Info: ${JSON.stringify(info)}`);
+    if (err) {
+      res.send(global.listStatus.notSuccess());
+      return null;
+    }
 
     if (!user) {
       res.send(global.listStatus.notExist());
@@ -21,13 +22,14 @@ const handler = (req, res, next) => {
 };
 
 /* const handler = (req, res, next) => {
-  const user = global.db.model.User({
+  const user = global.db.models.User({
     _id: global.db.mongoose.Types.ObjectId(),
     firstname: 'Nikita',
-    lastname: 'Savchuk',
-    username: 'user',
-    password: '123',
+    lastname: 'hashCheck',
+    username: 'hash',
   });
+
+  user.setPassword('123');
 
   user.save((err) => {
     if (err) throw err;

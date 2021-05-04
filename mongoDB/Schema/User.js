@@ -1,10 +1,30 @@
 import mongoose from 'mongoose';
+import crypto from 'crypto';
 
-const userSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
   firstname: String,
   lastname: String,
-  username: String,
-  password: String,
+  username: {
+    required: true,
+    type: String,
+  },
+  hash: {
+    required: true,
+    type: String,
+  },
+  salt: String,
 });
 
-export default userSchema;
+UserSchema.methods.setPassword = function (password) {
+  this.salt = crypto.randomBytes(16).toString('hex');
+
+  this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+};
+
+UserSchema.methods.validPassword = function (password) {
+  const hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+
+  return this.hash === hash;
+};
+
+export default UserSchema;

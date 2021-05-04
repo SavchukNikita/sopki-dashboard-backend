@@ -1,8 +1,8 @@
 import router from 'router';
-import signin from './signin/index.js';
+import handler from './handler/index.js';
 
 const appRouter = router();
 
-appRouter.use('/signin', signin);
+appRouter.use('/', handler);
 
 export default appRouter;

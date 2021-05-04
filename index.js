@@ -21,7 +21,12 @@ app.use(multer().array());
 app.use(expressSession({
   secret: 'sopkiKeySct',
   resave: true,
-  saveUninitialized: true,
+  rolling: true,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 60 * 60 * 1000,
+    httpOnly: false,
+  },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -35,19 +40,6 @@ app.listen(port, (error) => {
   if (error) return console.log(`Error: ${error}`);
 
   console.log(`Server listening on port ${port}`);
-
-  /* const user = new db.UserModel({
-    _id: db.mongoose.Schema.Types.ObjectId(),
-    firstname: 'Nikita',
-    lastname: 'Savchuk',
-  });
-
-  console.log(user);
-  user.save((err) => {
-    if (err) throw err;
-
-    console.log('Mongo: add success');
-  }); */
 
   /* const jira = new JiraApi({
     protocol: 'https',

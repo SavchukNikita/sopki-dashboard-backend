@@ -1,7 +1,8 @@
 import router from 'router';
+import users from './users/index.js';
 
 const appRouter = router();
 
-appRouter.use('/', (req, res) => res.send('good'));
+appRouter.use('/users', users);
 
 export default appRouter;

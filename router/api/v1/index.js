@@ -7,9 +7,7 @@ const appRouter = router();
 const isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) return next();
 
-  console.log(req.isAuthenticated());
-
-  res.send('notAuth');
+  res.send(global.listStatus.notAuth());
 };
 
 appRouter.use('/public', publicRoute);
