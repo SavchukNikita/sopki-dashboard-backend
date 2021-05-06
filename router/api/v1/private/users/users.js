@@ -1,8 +1,8 @@
 import router from 'router';
-import api from './api/index.js';
+import handler from './handler/handler.js';
 
 const appRouter = router();
 
-appRouter.use('/api', api);
+appRouter.post('/', handler);
 
 export default appRouter;

@@ -1,5 +1,5 @@
 import receive from './receive/index.js';
-import create from './create/index.js';
+import create from './create/create.js';
 
 const handler = (req, res, next) => {
   const { body } = req;

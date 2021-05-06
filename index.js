@@ -4,7 +4,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import expressSession from 'express-session';
 import multer from 'multer';
-import router from './router/index.js';
+import router from './router/router.js';
 import database from './mongoDB/index.js';
 import passport from './passport/index.js';
 import listStatus from './listStatus/index.js';

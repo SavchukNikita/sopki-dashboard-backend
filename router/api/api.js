@@ -1,8 +1,8 @@
 import router from 'router';
-import users from './users/index.js';
+import v1 from './v1/v1.js';
 
 const appRouter = router();
 
-appRouter.use('/users', users);
+appRouter.use('/v1', v1);
 
 export default appRouter;

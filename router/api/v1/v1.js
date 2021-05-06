@@ -1,6 +1,6 @@
 import router from 'router';
-import publicRoute from './public/index.js';
-import privateRoute from './private/index.js';
+import publicRoute from './public/public.js';
+import privateRoute from './private/private.js';
 
 const appRouter = router();
 

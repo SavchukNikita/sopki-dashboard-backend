@@ -1,5 +1,5 @@
 import router from 'router';
-import signin from './signin/index.js';
+import signin from './signin/signin.js';
 
 const appRouter = router();
 
