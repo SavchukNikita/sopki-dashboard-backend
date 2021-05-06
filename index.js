@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 import express from 'express';
-// import JiraApi from 'jira-client';
 import cookieParser from 'cookie-parser';
 import expressSession from 'express-session';
 import multer from 'multer';
@@ -8,6 +7,7 @@ import router from './router/router.js';
 import database from './mongoDB/index.js';
 import passport from './passport/index.js';
 import listStatus from './listStatus/index.js';
+import jira from './modules/jira/index.js';
 
 dotenv.config();
 const port = process.env.PORT;
@@ -35,18 +35,10 @@ app.use(router);
 global.db = database;
 global.passport = passport;
 global.listStatus = listStatus;
+global.jira = jira;
 
 app.listen(port, (error) => {
   if (error) return console.log(`Error: ${error}`);
 
   console.log(`Server listening on port ${port}`);
-
-  /* const jira = new JiraApi({
-    protocol: 'https',
-    host: 'sopki.atlassian.net',
-    username: 'savchuk@sopki.team',
-    password: 'w1z7pvUE5e4p2FRLOFxj6E3C',
-    apiVersion: '2',
-    strictSSL: true,
-  }); */
 });

@@ -1,36 +1,13 @@
-import validator from 'validator';
+import validator from './validator.js';
 
-const handler = (req, res) => {
+const create = (req, res) => {
   const { body } = req;
 
-  if (!body.firstname || validator.isEmpty(`${body.firstname}`)) {
-    res.send(global.listStatus.invalidFirstname());
-    return null;
-  }
-
-  if (!body.lastname || validator.isEmpty(`${body.lastname}`)) {
-    res.send(global.listStatus.invalidLastname());
-    return null;
-  }
-
-  if (!body.username || validator.isEmpty(`${body.username}`)) {
-    res.send(global.listStatus.invalidUsername());
-    return null;
-  }
+  if (!validator(req, res)) return null;
 
   const email = `${body.username.trim()}@sopki.team`;
 
-  if (!validator.isEmail(email)) {
-    res.send(global.listStatus.invalidUsername());
-    return null;
-  }
-
-  if (!body.password || body.password.length < 7) {
-    res.send(global.listStatus.invalidPassword());
-    return null;
-  }
-
-  global.db.models.User.findOne({ username: body.username }, (err, user) => {
+  global.db.models.User.findOne({ username: body.username }, async (err, user) => {
     if (err) {
       res.send(global.listStatus.notSuccess());
       return null;
@@ -51,6 +28,17 @@ const handler = (req, res) => {
 
     newUser.setPassword(body.password);
 
+    try {
+      await global.jira.createUser({
+        emailAddress: newUser.email,
+        displayName: `${newUser.firstname} ${newUser.lastname}`,
+        password: body.password,
+      });
+    } catch (error) {
+      res.send(global.listStatus.notSuccess());
+      return null;
+    }
+
     newUser.save((error) => {
       if (error) {
         res.send(global.listStatus.notSuccess());
@@ -62,4 +50,4 @@ const handler = (req, res) => {
   });
 };
 
-export default handler;
+export default create;

@@ -1,5 +1,5 @@
 import passport from 'passport';
-import handler from './handler/handler.js';
+import handler from './handler.js';
 
 passport.use('local', handler);
 
