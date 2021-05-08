@@ -14,6 +14,8 @@ const UserSchema = mongoose.Schema({
     type: String,
   },
   salt: String,
+  jiraId: String,
+  role: String,
 });
 
 UserSchema.methods.setPassword = function (password) {

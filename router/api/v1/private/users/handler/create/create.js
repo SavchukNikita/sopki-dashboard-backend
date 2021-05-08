@@ -24,12 +24,15 @@ const create = (req, res) => {
       lastname: body.lastname,
       username: body.username,
       email,
+      role: body.role ? body.role : 'developer',
     });
 
     newUser.setPassword(body.password);
 
+    let jiraRes = null;
+
     try {
-      await global.jira.createUser({
+      jiraRes = await global.jira.createUser({
         emailAddress: newUser.email,
         displayName: `${newUser.firstname} ${newUser.lastname}`,
         password: body.password,
@@ -38,6 +41,8 @@ const create = (req, res) => {
       res.send(global.listStatus.notSuccess());
       return null;
     }
+
+    if (jiraRes) newUser.jiraId = jiraRes.accountId;
 
     newUser.save((error) => {
       if (error) {
