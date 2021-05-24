@@ -8,6 +8,11 @@ const handler = (req, res, next) => {
     return null;
   }
 
+  if (body.method === 'create') {
+    receive(req, res);
+    return null;
+  }
+
   res.send(global.listStatus.invalidMethod());
   return null;
 };

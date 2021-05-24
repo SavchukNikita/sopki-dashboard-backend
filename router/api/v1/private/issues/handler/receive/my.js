@@ -1,3 +1,5 @@
+import myIssue from '../../../../../../../modules/jira/issue/issue.js';
+
 const my = async (req, res) => {
   const { email } = req.user;
 
@@ -20,7 +22,7 @@ const my = async (req, res) => {
   if (jiraRes.issues) rawIssues = jiraRes.issues;
 
   for (let i = 0; i < rawIssues.length; i += 1) {
-    const { fields } = rawIssues[i];
+    /* const { fields } = rawIssues[i];
     const issue = {};
 
     issue.type = fields.issuetype.name;
@@ -40,7 +42,9 @@ const my = async (req, res) => {
     if (fields.creator && !issue.creator) {
       // eslint-disable-next-line no-await-in-loop
       issue.creator = await global.db.models.User.findOne({ jiraId: fields.creator.accountId });
-    }
+    } */
+
+    const issue = myIssue.formatIssue(rawIssues[i]);
 
     issues.push(issue);
   }
