@@ -17,6 +17,8 @@ const all = async (req, res) => {
 
   if (jiraRes.issues) rawIssues = jiraRes.issues;
 
+  console.log(rawIssues[0].fields.project);
+
   for (let i = 0; i < rawIssues.length; i += 1) {
     // eslint-disable-next-line no-await-in-loop
     const issue = await myIssue.formatIssue(rawIssues[i]);

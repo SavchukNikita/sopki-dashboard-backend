@@ -1,4 +1,5 @@
 import receive from './receive/receive.js';
+import create from './create/create.js';
 
 const handler = (req, res, next) => {
   const { body } = req;
@@ -9,7 +10,7 @@ const handler = (req, res, next) => {
   }
 
   if (body.method === 'create') {
-    receive(req, res);
+    create(req, res);
     return null;
   }
 

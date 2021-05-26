@@ -49,6 +49,21 @@ export default {
     data,
   }),
 
+  invalidSummary: (data = null) => ({
+    status: 'invalidSummary',
+    data,
+  }),
+
+  invalidDescription: (data = null) => ({
+    status: 'invalidDescription',
+    data,
+  }),
+
+  invalidType: (data = null) => ({
+    status: 'invalidType',
+    data,
+  }),
+
   alreadyExist: (data = null) => ({
     status: 'alreadyExist',
     data,
