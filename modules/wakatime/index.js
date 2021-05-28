@@ -1,17 +1,27 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
 
-const params = new URLSearchParams();
-params.append('client_id', 'gru8oOqUh1qoBvBciZYv69v9');
-params.append('client_secret', 'sec_KC5molcj94fakXhi1A7ksET8sisIcEpYZetTP8bYDSPfzSTnvqdnZyLjAfFGMoUI5ksnlEpodYuGnXtg');
-params.append('grant_type', 'authorization_code');
-params.append('response_type', 'code');
+dotenv.config({ path: '../../.env' });
+
+const apiKey = process.env.WAKATIME_API_KEY;
+const base64Key = Buffer.from(apiKey).toString('base64');
 
 const config = {
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: `Basic ${base64Key}`,
   },
 };
 
-axios.post('https://wakatime.com/oauth/authorize', params, config)
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err));
+function get(url) {
+  try {
+    return axios.get(`https://wakatime.com${url}`, config);
+  } catch (error) {
+    console.log(error);
+  }
+
+  return null;
+}
+
+export default {
+  get,
+};
