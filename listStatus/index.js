@@ -68,4 +68,11 @@ export default {
     status: 'alreadyExist',
     data,
   }),
+
+  notAccepted: (data = null) => (
+    {
+      status: 'notAccepted',
+      data,
+    }
+  ),
 };

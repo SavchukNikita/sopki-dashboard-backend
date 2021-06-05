@@ -11,6 +11,6 @@ const isAuthenticated = (req, res, next) => {
 };
 
 appRouter.use('/public', publicRoute);
-appRouter.use('/private', isAuthenticated, privateRoute);
+appRouter.use('/private', privateRoute);
 
 export default appRouter;
