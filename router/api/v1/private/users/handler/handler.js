@@ -1,5 +1,6 @@
 import receive from './receive/index.js';
 import create from './create/create.js';
+import update from './update/update.js';
 
 const handler = (req, res, next) => {
   const { body } = req;
@@ -11,6 +12,11 @@ const handler = (req, res, next) => {
 
   if (body.method === 'create') {
     create(req, res);
+    return null;
+  }
+
+  if (body.method === 'update') {
+    update(req, res);
     return null;
   }
 
