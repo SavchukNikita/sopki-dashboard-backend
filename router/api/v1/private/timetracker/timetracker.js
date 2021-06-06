@@ -1,6 +1,6 @@
 import router from 'router';
 import update from './update.js';
-import receive from './receive/all.js';
+import receive from './receive/receive.js';
 
 const appRouter = router();
 

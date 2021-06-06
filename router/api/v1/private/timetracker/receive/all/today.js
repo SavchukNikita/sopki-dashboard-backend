@@ -1,8 +1,6 @@
-import wakatime from '../../../../../../modules/wakatime/index.js';
+import wakatime from '../../../../../../../modules/wakatime/index.js';
 
 const day = async (req, res) => {
-  const { date } = req.body;
-
   global.db.models.User.find({ wakatimeId: { $ne: null } }, async (err, docs) => {
     if (err) throw err;
 
