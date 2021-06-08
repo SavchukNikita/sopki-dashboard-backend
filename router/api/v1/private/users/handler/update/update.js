@@ -20,6 +20,7 @@ const update = (req, res) => {
         firstname: body.firstname || doc.firstname,
         lastname: body.lastname || doc.lastname,
         email: body.email || doc.email,
+        role: body.role || doc.role,
       },
 
       (error, docUpd) => {
@@ -33,7 +34,18 @@ const update = (req, res) => {
           return null;
         }
 
-        res.send(global.listStatus.success());
+        global.db.models.User.findById(body.id, async (_error, usr) => {
+          if (_error) throw err;
+
+          if (!usr) {
+            res.send(global.listStatus.notExist());
+            return null;
+          }
+
+          res.send(global.listStatus.success(usr));
+          return null;
+        });
+
         return null;
       });
   });

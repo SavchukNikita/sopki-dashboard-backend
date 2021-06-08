@@ -9,6 +9,7 @@ const create = (req, res) => {
 
   global.db.models.User.findOne({ username: body.username }, async (err, user) => {
     if (err) {
+      console.log(err);
       res.send(global.listStatus.notSuccess());
       return null;
     }
@@ -18,12 +19,19 @@ const create = (req, res) => {
       return null;
     }
 
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    today = `${dd}.${mm}.${yyyy}`;
+
     const newUser = global.db.models.User({
       _id: global.db.mongoose.Types.ObjectId(),
       firstname: body.firstname,
       lastname: body.lastname,
       username: body.username,
       email,
+      create_at: today,
       role: body.role ? body.role : 'developer',
     });
 
@@ -38,6 +46,7 @@ const create = (req, res) => {
         password: body.password,
       });
     } catch (error) {
+      console.log(error);
       res.send(global.listStatus.notSuccess());
       return null;
     }
@@ -46,6 +55,7 @@ const create = (req, res) => {
 
     newUser.save((error) => {
       if (error) {
+        console.log(error);
         res.send(global.listStatus.notSuccess());
         return null;
       }
