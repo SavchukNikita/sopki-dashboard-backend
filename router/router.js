@@ -3,8 +3,6 @@ import api from './api/api.js';
 
 const appRouter = router();
 
-appRouter.use('/api', (req, res) => {
-  res.header('Access-Control-Allow-Credentials', 'true');
-});
+appRouter.use('/api', api);
 
 export default appRouter;
