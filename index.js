@@ -32,7 +32,7 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(router);
-app.use(cors({ credentials: true, origin: 'http://localhost:8080' }));
+app.use(cors());
 
 global.db = database;
 global.passport = passport;
